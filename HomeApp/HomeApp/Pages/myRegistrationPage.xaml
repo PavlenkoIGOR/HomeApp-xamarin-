@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HomeApp"
+             x:Class="HomeApp.Pages.myRegistrationPage">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" >
+            <Frame Padding="0" BorderColor="Transparent" HasShadow="False" BackgroundColor="Transparent">
+                <Entry x:Name="eMailEntryField" Placeholder="Введите Ваш e-Mail" PlaceholderColor="Gray" VerticalTextAlignment="Center" />
+            </Frame>
+            <Button x:Name="confirmButton" Text="Подтвердить" WidthRequest="300" HeightRequest="50" BorderWidth="5" HorizontalOptions="Start"/>
+            <Label x:Name="asd" Text="Already have an accoun?" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
