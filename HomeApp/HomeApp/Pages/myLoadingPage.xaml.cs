@@ -15,6 +15,8 @@ namespace HomeApp
         public myLoadingPage()
         {
             InitializeComponent();
+
+
             // Объявим новый текстовый элемент
             Label header = new Label() { Text = $"Запуск вашего первого приложения{Environment.NewLine} на Xamarin..." };
 

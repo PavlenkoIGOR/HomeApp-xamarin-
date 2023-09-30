@@ -12,9 +12,9 @@ using Xamarin.Forms.Xaml;
 namespace HomeApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class myDevicesPage : ContentPage
+    public partial class myDeviceControlPage : ContentPage
     {
-        public myDevicesPage()
+        public myDeviceControlPage()
         {
             InitializeComponent();
             GetDevices();
@@ -25,26 +25,28 @@ namespace HomeApp.Pages
         /// </summary>
         public void GetDevices()
         {
+            
             // Создадим некий список устройств.
             // В реальном приложении они могут доставаться из базы или веб-сервиса.
-            var homeDevices = new List<HomeDevice>();
-
-            // Заполняем список устройств
-            homeDevices.Add(new HomeDevice("Чайник", "kettle.jpeg"));
-            homeDevices.Add(new HomeDevice("Стиральная машина"));
-            homeDevices.Add(new HomeDevice("Посудомоечная машина"));
-            homeDevices.Add(new HomeDevice("Мультиварка"));
-            homeDevices.Add(new HomeDevice("Водонагреватель"));
-            homeDevices.Add(new HomeDevice("Плита"));
-            homeDevices.Add(new HomeDevice("Микроволновая печь"));
-            homeDevices.Add(new HomeDevice("Духовой шкаф"));
-            homeDevices.Add(new HomeDevice("Холодильник"));
-            homeDevices.Add(new HomeDevice("Увлажнитель воздуха"));
-            homeDevices.Add(new HomeDevice("Телевизор"));
-            homeDevices.Add(new HomeDevice("Пылесос"));
-            homeDevices.Add(new HomeDevice("музыкальный центр"));
-            homeDevices.Add(new HomeDevice("Компьютер"));
-            homeDevices.Add(new HomeDevice("Игровая консоль"));
+            var homeDevices = new List<HomeDevice>
+            {
+                // Заполняем список устройств
+                new HomeDevice("Чайник", "kettle.jpeg"),
+                new HomeDevice("Стиральная машина"),
+                new HomeDevice("Посудомоечная машина"),
+                new HomeDevice("Мультиварка"),
+                new HomeDevice("Водонагреватель"),
+                new HomeDevice("Плита"),
+                new HomeDevice("Микроволновая печь"),
+                new HomeDevice("Духовой шкаф"),
+                new HomeDevice("Холодильник"),
+                new HomeDevice("Увлажнитель воздуха"),
+                new HomeDevice("Телевизор"),
+                new HomeDevice("Пылесос"),
+                new HomeDevice("музыкальный центр"),
+                new HomeDevice("Компьютер"),
+                new HomeDevice("Игровая консоль")
+            };
 
             var innerStack = new StackLayout();
 
@@ -82,10 +84,22 @@ namespace HomeApp.Pages
         /// </summary>
         public async Task ShowImage(object sender, EventArgs e, string imageName)
         {
-            // Если изображение отсутствует - показываем информационное окно
+            // Если изображение отсутствует
             if (String.IsNullOrEmpty(imageName))
             {
-                await DisplayAlert("", "Изображение устройства отсутствует", "OK");
+                //await DisplayAlert("", "Изображение устройства отсутствует", "OK");
+
+                // Создаем новый объект изображения
+                Image img = new Image();
+                // Подключаем удаленный ресурс в качестве источника изображения
+                img.Source = new UriImageSource
+                {
+                    CachingEnabled = false,
+                    Uri = new Uri("https://i.stack.imgur.com/y9DpT.jpg")
+                };
+
+                // Инициализируем страницу
+                Content = img;
                 return;
             }
 

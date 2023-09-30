@@ -6,9 +6,15 @@
              x:Class="HomeApp.Pages.myLoginPage"
 >
 
-    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+    <!--<StackLayout VerticalOptions="Center" HorizontalOptions="Center">
         <Label Text="HomeApp - Ваш умный дом" FontSize="Title" Padding="30,10,30,10" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
         <Button x:Name="loginButton" Text="{x:Static local1:myLoginPage.BUTTON_TEXT}" CornerRadius="{local2:ButtonViewExtension ButtonStyle=Round}" Clicked="Login_Click" />
         <Label x:Name="errorMessage" FontSize="Small" TextColor="Red" Padding="30,10,30,10" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+    </StackLayout>-->
+    <StackLayout VerticalOptions="Center"  HorizontalOptions="Center"  x:Name="stackLayout">
+        <Label Text="HomeApp - Ваш умный дом" FontSize="Title" Padding="30,10,30,10" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+        <Button x:Name="loginButton" Text="{x:Static local:Pages.LoginPage.BUTTON_TEXT}" Clicked="Login_Click" CornerRadius="{local2:ButtonViewExtension ButtonStyle=SemiRound}"/>
+        <Label x:Name="infoMessage" FontSize="Small" TextColor="{local:RgbExtension Red=255, Blue=255, Green=0}" Padding="30,10,30,10" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+        <Label x:Name="runningDevice" FontSize="15" Padding="30,10,30,10" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
     </StackLayout>
 </ContentPage>
