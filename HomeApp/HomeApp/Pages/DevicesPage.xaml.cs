@@ -1,9 +1,8 @@
 ﻿using HomeApp.Mdels;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -12,9 +11,9 @@ using Xamarin.Forms.Xaml;
 namespace HomeApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class myDeviceControlPage : ContentPage
+    public partial class DevicesPage : ContentPage
     {
-        public myDeviceControlPage()
+        public DevicesPage()
         {
             InitializeComponent();
             GetDevices();
@@ -25,28 +24,26 @@ namespace HomeApp.Pages
         /// </summary>
         public void GetDevices()
         {
-            
             // Создадим некий список устройств.
             // В реальном приложении они могут доставаться из базы или веб-сервиса.
-            var homeDevices = new List<HomeDevice>
-            {
-                // Заполняем список устройств
-                new HomeDevice("Чайник", "kettle.jpeg"),
-                new HomeDevice("Стиральная машина"),
-                new HomeDevice("Посудомоечная машина"),
-                new HomeDevice("Мультиварка"),
-                new HomeDevice("Водонагреватель"),
-                new HomeDevice("Плита"),
-                new HomeDevice("Микроволновая печь"),
-                new HomeDevice("Духовой шкаф"),
-                new HomeDevice("Холодильник"),
-                new HomeDevice("Увлажнитель воздуха"),
-                new HomeDevice("Телевизор"),
-                new HomeDevice("Пылесос"),
-                new HomeDevice("музыкальный центр"),
-                new HomeDevice("Компьютер"),
-                new HomeDevice("Игровая консоль")
-            };
+            var homeDevices = new List<HomeDevice>();
+
+            // Заполняем список устройств
+            homeDevices.Add(new HomeDevice("Чайник", "kettle.jpg"));
+            homeDevices.Add(new HomeDevice("Стиральная машина"));
+            homeDevices.Add(new HomeDevice("Посудомоечная машина"));
+            homeDevices.Add(new HomeDevice("Мультиварка"));
+            homeDevices.Add(new HomeDevice("Водонагреватель"));
+            homeDevices.Add(new HomeDevice("Плита"));
+            homeDevices.Add(new HomeDevice("Микроволновая печь"));
+            homeDevices.Add(new HomeDevice("Духовой шкаф"));
+            homeDevices.Add(new HomeDevice("Холодильник"));
+            homeDevices.Add(new HomeDevice("Увлажнитель воздуха"));
+            homeDevices.Add(new HomeDevice("Телевизор"));
+            homeDevices.Add(new HomeDevice("Пылесос"));
+            homeDevices.Add(new HomeDevice("музыкальный центр"));
+            homeDevices.Add(new HomeDevice("Компьютер"));
+            homeDevices.Add(new HomeDevice("Игровая консоль"));
 
             var innerStack = new StackLayout();
 

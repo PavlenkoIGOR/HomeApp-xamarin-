@@ -16,5 +16,6 @@ namespace HomeApp.Pages
         {
             InitializeComponent();
         }
+
     }
 }

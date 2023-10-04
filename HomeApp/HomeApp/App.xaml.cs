@@ -12,7 +12,7 @@ namespace HomeApp
             // инициализация интерфейса
             InitializeComponent();
             // Инициализация главного экрана
-            MainPage = /*new ProfilePage();*//*new myPaddingPage();*//*new myClimatePage();*//*new myDevicesPage();*//*new NavigationPage(new myLoginPage());*//*new myRegistrationPage();*/new myLoginPage();/*new myLoadingPage();*//*new MainPage();*/
+            MainPage = new myNewDevicePage();/*new NavigationPage(new myLoginPage());*/
         }
 
         protected override void OnStart()

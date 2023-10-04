@@ -2,7 +2,106 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HomeApp.App">
-    <Application.Resources>
+    <!--<Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="Opacity" Value="0.8" />
+                <Setter Property="TextColor" Value="Aqua"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>-->
 
+    <!--<Application.Resources> --><!--Для хранения стилей также используется контейнер Resources.--><!--
+            <ResourceDictionary>
+            --><!--<Style x:Key="buttonStyle" TargetType="Button">
+                --><!--Ключ x:Key позволяет нам ссылать на ресурс, содержащий стиль, и применять его к нужным нам элементам следующим образом: Style="{StaticResource buttonStyle}".
+                Однако, если мы хотим применить стиль автоматически ко всем элементам определенного вида (например, кнопкам), то ключ можно не указывать, оставив лишь TargetType.
+                TargetType — указывает на тип элементов, к которым будет применен стиль, если у него нет ключа. --><!--
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="Opacity" Value="0.8" />
+            </Style>-->
+
+            <!--2 вариант. Или так
+                Но иногда бывает нужно установить более сложные. Например, если бы мы решили установить цвет текста, применив метод Color.FromRgb(...), мы бы сделали это так:-->
+            <!--<Style TargetType="Button">
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="Opacity" Value="0.8" />
+                <Setter Property="TextColor" >
+                    <Setter.Value>
+                        <Color>
+                            <x:Arguments>
+                                <x:Double>0</x:Double>
+                                <x:Double>0</x:Double>
+                                <x:Double>0</x:Double>
+                            </x:Arguments>
+                        </Color>
+                    </Setter.Value>
+                </Setter>
+            </Style>-->
+                
+            <!--3 вариант. А можно то же сделать так--><!--
+            <Style TargetType="Button">
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="Opacity" Value="0.8" />
+            </Style>
+
+
+                
+        </ResourceDictionary>
+    </Application.Resources>-->
+<!--</Application>-->
+
+    <!--при такой инициализации style кнопок во всех страницах нужно убрать-->
+    <!--инициализация триггеров-->
+        <!--<Application.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="Opacity" Value="0.8" />
+                <Style.Triggers>
+                    <Trigger Property="IsPressed" Value="True" TargetType="Button">
+                        <Setter Property="TextColor" Value="LightBlue" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>-->
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="Opacity" Value="0.8" />
+                <Style.Triggers>
+                    <Trigger Property="IsPressed" Value="True" TargetType="Button">
+                        <Setter Property="TextColor" Value="LightBlue" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="Entry" x:Key="ValidInputStyle">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="ValidStates">
+                            <VisualState x:Name="Valid">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="CornflowerBlue" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Invalid">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="IndianRed" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="LightCyan" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
