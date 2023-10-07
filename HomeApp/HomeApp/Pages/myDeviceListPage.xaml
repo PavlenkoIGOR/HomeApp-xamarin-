@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HomeApp.Pages.myDeviceListPage"
+             xmlns:Local="Ima"
+             BackgroundColor="BurlyWood">
+    <!--<StackLayout>
+        <Label Text="HomeApp - Ваши устройства" HorizontalOptions="Center" FontSize="Large"  Padding="30,10,30,10" StyleId="header" />
+        --><!--<ListView x:Name="deviceList"
+             HasUnevenRows="True"
+             ItemsSource="{Binding Devices}"
+             ItemSelected="deviceList_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout >
+                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18" Padding="10, 5, 10, 5"/>
+                                <Label Text="{Binding Description}"  Padding="10, 5, 0, 0" />
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>-->
+    <!--подключене изображений-->
+    <!--
+        <ListView x:Name="deviceList"
+       HasUnevenRows="True"
+       ItemsSource="{Binding Devices}"
+       ItemSelected="deviceList_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell
+                        ImageSource="{Binding Image}"
+                        Text="{Binding Name}"
+                        Detail="{Binding Description}"
+                        TextColor="Firebrick"
+                        DetailColor="Gray"
+                    />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button BackgroundColor ="SteelBlue"  x:Name="addButton" Text="Добавить" StyleClass="btn-add" Margin="100,100"></Button>
+    </StackLayout>
+</ContentPage>-->
+
+    <!--ObservableCollection-->
+    <!--<StackLayout>
+        <Label Text="HomeApp - Ваши устройства" HorizontalOptions="Center" FontSize="Large"  Padding="30,10,30,10" StyleId="header" />
+        <ListView x:Name="deviceList"
+             HasUnevenRows="True"
+             ItemsSource="{Binding Devices}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell
+                        ImageSource="{Binding Image}"
+                        Text="{Binding Name}"
+                        Detail="{Binding Description}"
+                        TextColor="DodgerBlue"
+                        DetailColor="Gray"
+                   />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout>
+            <Image Source="Images/Chainik.png"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" Padding="15,10,30,15" HorizontalOptions="StartAndExpand" >
+            <Button Clicked="AddDevice"  Text="Новое устройство" />
+            <Button Clicked="RemoveDevice" Text="Удалить устройство" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>-->
+
+    <!--для Группировка в ListView-->
+    <StackLayout>
+        <Label Text="HomeApp - Ваши устройства" HorizontalOptions="Center" FontSize="Large"  Padding="30,10,30,10" StyleId="header" />
+        <ListView x:Name="deviceList"
+             HasUnevenRows="True"
+             GroupDisplayBinding="{Binding Name}"
+             
+             ItemsSource="{Binding DeviceGroups}"
+                 IsGroupingEnabled="True"
+                 SeparatorVisibility="Default"
+                 RowHeight="60"
+                 >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell
+                       Text="{Binding Name}"
+                       Detail="{Binding Description}"
+                       TextColor="DodgerBlue"
+                       DetailColor="Gray"
+                   />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </StackLayout>
+</ContentPage>
