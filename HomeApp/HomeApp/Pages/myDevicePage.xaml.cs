@@ -1,26 +1,26 @@
-﻿using System;
+﻿using HomeApp.Mdels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using HomeApp.Mdels;
 
 namespace HomeApp.Pages
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class myNewDevicePage : ContentPage
-    {
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class myDevicePage : ContentPage
+	{
         public static string PageName { get; set; }
         public static string DeviceName { get; set; }
         public static string DeviceDescription { get; set; }
+
         public HomeDevice HomeDevice { get; set; }
 
-        public myNewDevicePage(string pageName, HomeDevice homeDevice = null)
-        {
+        public myDevicePage (string pageName, HomeDevice homeDevice = null)
+		{
             PageName = pageName;
 
             if (homeDevice != null)
@@ -33,7 +33,7 @@ namespace HomeApp.Pages
             {
                 HomeDevice = new HomeDevice();
             }
-            InitializeComponent();
+            InitializeComponent ();
             OpenEditor();
         }
         public void OpenEditor()

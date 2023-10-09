@@ -21,13 +21,18 @@ namespace HomeApp.Pages
         /// Группируемая коллекция
         /// </summary>
         public ObservableCollection<Group<string, HomeDevice>> DeviceGroups { get; set; } = new ObservableCollection<Group<string, HomeDevice>>();
+
+        /// <summary>
+        /// Ссылка на выбранный объект
+        /// </summary>
+        HomeDevice SelectedDevice;
         public myDeviceListPage ()
 		{
 			InitializeComponent ();
 
             // Первоначальные данные сохраним в обычном листе
             var initialList = new List<HomeDevice>();
-            initialList.Add(new HomeDevice("Чайник", "Chainik.png", "LG, объем 2л.", "Кухня"));
+            initialList.Add(new HomeDevice("Чайник", "Chainik.png", "LG, объем 2л.", "Кухня")); //HomeApp.Android/Resources/drawable/Chainik.png
             initialList.Add(new HomeDevice("Стиральная машина", "StiralnayaMashina.png", description: "BOSCH", "Ванная"));
             initialList.Add(new HomeDevice("Посудомоечная машина", "PosudomoechnayaMashina.png", "Gorenje", "Кухня"));
             initialList.Add(new HomeDevice("Мультиварка", "Multivarka.png", "Philips", "Кухня"));
@@ -58,12 +63,46 @@ namespace HomeApp.Pages
         /// </summary>
         private void deviceList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            //// распаковка модели из объекта
+            //var selectedDevice = (HomeDevice)e.SelectedItem;
+            //// уведомление
+            //DisplayAlert("Выбор", $"Вы выбрали {selectedDevice.Name}", "OK");
             // распаковка модели из объекта
-            var selectedDevice = (HomeDevice)e.SelectedItem;
-            // уведомление
-            DisplayAlert("Выбор", $"Вы выбрали {selectedDevice.Name}", "OK"); ; ;
+            SelectedDevice = (HomeDevice)e.SelectedItem;
+        }
+        private async void LogoutButton_Clicked(object sender, EventArgs e)
+        {
+            // Возврат на первую страницу стека навигации (корневую страницу приложения) - экран логина
+            await Navigation.PopAsync();
         }
 
+        private async void NewDeviceButton_Clicked(object sender, EventArgs e)
+        {
+            // Переход на следующую страницу - страницу нового устройства (и помещение её в стек навигации)
+            await Navigation.PushAsync(new myNewDevicePage(null, null));
+        }
+
+        /// <summary>
+        /// обработчик новой кнопки «Изменить»
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void EditDeviceButton_Clicked(object sender, EventArgs e)
+        {
+            // проверяем, выбрал ли пользователь устройство из списка
+            if (SelectedDevice == null)
+            {
+                await DisplayAlert(null, $"Пожалуйста, выберите устройство!", "OK");
+                return;
+            }
+
+            // Переход на следующую страницу - страницу нового устройства (и помещение её в стек навигации)
+            await Navigation.PushAsync(new myDevicePage("Изменить устройство", SelectedDevice));
+        }
+        private async void UserProfileButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ProfilePage());
+        }
         ///// <summary>
         ///// Обработчик добавления нового устройства
         ///// </summary>
