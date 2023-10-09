@@ -6,5 +6,6 @@
             Title="{x:Static local:myDevicePage.PageName}"
             >
     <StackLayout x:Name="stackLayout" BackgroundColor="LightGray"  Padding="0, 20">
+        
     </StackLayout>
 </ContentPage>

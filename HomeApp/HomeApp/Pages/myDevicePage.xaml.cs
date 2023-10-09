@@ -89,6 +89,15 @@ namespace HomeApp.Pages
             };
             addButton.Clicked += (sender, eventArgs) => SaveButtonClicked(sender, eventArgs, new View[] { newDeviceName, newDeviceDescription, switchControl });
 
+            // Добавляем кнопку перехода на страницу с инструкцией и её обработчик
+            var userManualButton = new Button
+            {
+                Text = "Инструкция по эксплуатации",
+                Margin = new Thickness(30, 10),
+                BackgroundColor = Color.Silver,
+            };
+            userManualButton.Clicked += (sender, eventArgs) => ManualButtonClicked(sender, eventArgs);
+            stackLayout.Children.Add(userManualButton);
             stackLayout.Children.Add(addButton);
         }
 
@@ -129,6 +138,13 @@ namespace HomeApp.Pages
             {
                 DeviceDescription = view.Text;
             }
+        }
+        /// <summary>
+        /// Переход на страницу с инструкцией
+        /// </summary>
+        private async void ManualButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new myDeviceManualPage(HomeDevice.Name, HomeDevice.Id));
         }
     }
 }

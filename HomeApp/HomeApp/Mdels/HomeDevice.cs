@@ -9,6 +9,8 @@ namespace HomeApp.Mdels
     {
         private string _name;
         private string _description;
+        public string Image { get; set; }
+        public string Room { get; set; }
 
         public Guid Id { get; set; }
 
@@ -44,8 +46,7 @@ namespace HomeApp.Mdels
             }
         }
 
-        public string Image { get; set; }
-        public string Room { get; set; }
+
 
         public HomeDevice(string name = null, string image = null, string description = null, string room = null)
         {
