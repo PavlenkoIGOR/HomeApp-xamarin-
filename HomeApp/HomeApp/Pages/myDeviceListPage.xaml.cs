@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
 namespace HomeApp.Pages
 {
@@ -28,22 +29,24 @@ namespace HomeApp.Pages
         public myDeviceListPage ()
 		{
 			InitializeComponent ();
+        }
 
-            // Первоначальные данные сохраним в обычном листе
-            // Первоначальные данные сохраним в обычном листе
-            var initialList = new List<HomeDevice>();
-            initialList.Add(new HomeDevice("Чайник", "Chainik.png", "LG, объем 2л.", "Кухня") { Id = new Guid("735a3848-dad1-40f6-8fb7-36d2da16f1f3") });
-            initialList.Add(new HomeDevice("Стиральная машина", "StiralnayaMashina.png", description: "BOSCH", "Ванная") { Id = new Guid("cca22a07-5593-4485-b21d-ed7aba4ac815") });
-            initialList.Add(new HomeDevice("Посудомоечная машина", "PosudomoechnayaMashina.png", "Gorenje", "Кухня") { Id = new Guid("eba7c7eb-941b-4b1d-a179-21fa87a783ac") });
-            initialList.Add(new HomeDevice("Мультиварка", "Multivarka.png", "Philips", "Кухня") { Id = new Guid("7e19330d-23f2-4fe7-b8b7-14d3c8163e73") });
+        //Логика наполнения страницы данными теперь происходит не в методе-конструкторе, а в методе, вызываемом при появлении страницы в зоне видимости — OnAppearing().
+        protected async override void OnAppearing()
+        {
+            // Загрузка данных из базы
+            var devicesFromDb = await App.HomeDevices.GetHomeDevices();
+            // Мапим сущности БД в сущности бизнес-логики
+            var deviceList = App.Mapper.Map<Mdels.HomeDevice[]>(devicesFromDb);
 
             // Сгруппируем по комнатам
-            var devicesByRooms = initialList.GroupBy(d => d.Room).Select(g => new Group<string, HomeDevice>(g.Key, g));
+            var devicesByRooms = deviceList.GroupBy(d => d.Room).Select(g => new Group<string, HomeDevice>(g.Key, g));
 
             // Сохраним
             DeviceGroups = new ObservableCollection<Group<string, HomeDevice>>(devicesByRooms);
+            BindingContext = this;
 
-            BindingContext = this; //Происходит установка контекста привязки: BindingContext = this. В итоге из XAML-страницы можно обратиться к любым публичным свойствам.
+            base.OnAppearing();
         }
 
         /// <summary>
@@ -63,11 +66,6 @@ namespace HomeApp.Pages
         /// </summary>
         private void deviceList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            //// распаковка модели из объекта
-            //var selectedDevice = (HomeDevice)e.SelectedItem;
-            //// уведомление
-            //DisplayAlert("Выбор", $"Вы выбрали {selectedDevice.Name}", "OK");
-            // распаковка модели из объекта
             SelectedDevice = (HomeDevice)e.SelectedItem;
         }
         private async void LogoutButton_Clicked(object sender, EventArgs e)
@@ -103,6 +101,21 @@ namespace HomeApp.Pages
         {
             await Navigation.PushAsync(new ProfilePage());
         }
+
+        private async void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            // Получаем сущность базы данных, которую следует удалить (мапим из внутренней сущности, представляющей выбранное устройство)
+            var deviceToDelete = App.Mapper.Map<Data.Tables.HomeDevice>(SelectedDevice);
+            // Удаляем сущность из бд
+            await App.HomeDevices.DeleteHomeDevice(deviceToDelete);
+
+            // Обновляем интерфейс
+            var grp = DeviceGroups.FirstOrDefault(g => g.Name == SelectedDevice.Room);
+            var deviceToRemove = grp.FirstOrDefault(d => d.Id == deviceToDelete.Id);
+            grp.Remove(deviceToRemove);
+        }
+
+
         ///// <summary>
         ///// Обработчик добавления нового устройства
         ///// </summary>
